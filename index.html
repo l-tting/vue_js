@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="vueapp" >
+        <p>My Vue Application</p>
+
+        
+
+    <div>
+         <form action="">
+            <input type="text" placeholder="Title" v-model="budgetData.title">
+            <input type="number" placeholder="Amount" v-model="budgetData.amount">
+            <input type="date" placeholder="Date" v-model="budgetData.date">
+            <Button>Add Budget</Button>
+
+        </form>
+
+    </div>
+       
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="budget in budgets">
+                    <td>{{ budget.title }}</td>
+                    <td>{{ budget.amount }}</td>
+                    <td> {{ budget.date }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+        Vue.createApp({
+            data(){
+                return {
+                    budgets:[],
+                    budgetData:{
+                        title:"", 
+                        amount:"",
+                        date:""
+                    }
+                }
+            },
+            methods:{
+               async fetch_budgets(){
+                    const response = await axios.get('http://127.0.0.1:5000/budgets')
+                    this.budgets = response.data.budgets
+
+                }
+            },
+            created (){
+                this.fetch_budgets()
+            }
+
+        }).mount('#vueapp')
+    </script>
+</body>
+</html>
