@@ -12,7 +12,7 @@
         
 
     <div>
-         <form action="">
+         <form @submit.prevent="add_budget">
             <input type="text" placeholder="Title" v-model="budgetData.title">
             <input type="number" placeholder="Amount" v-model="budgetData.amount">
             <input type="date" placeholder="Date" v-model="budgetData.date">
@@ -33,8 +33,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="budget in budgets">
-                    <td>{{ budget.title }}</td>
+                <tr v-for="budget in budgets" :key="budget.id">
+                    <td>{{ budget.title }}</td>. 
                     <td>{{ budget.amount }}</td>
                     <td> {{ budget.date }}</td>
                 </tr>
@@ -59,9 +59,43 @@
             },
             methods:{
                async fetch_budgets(){
-                    const response = await axios.get('http://127.0.0.1:5000/budgets')
-                    this.budgets = response.data.budgets
+                try{
+                    const token = localStorage.getItem("token")
 
+                     const response = await axios.get('http://127.0.0.1:5000/budgets',{
+                        headers:{
+                            Authorization: `Bearer ${token}`
+                        }
+                     })
+                     this.budgets = response.data.budgets
+
+                }catch(err){
+                    console.log(err)
+                }
+                } ,
+
+                async add_budget(){  
+                    try{
+                        const token = localStorage.getItem('token')
+                        await axios.post('http://127.0.0.1:5000/budgets',this.budgetData,{
+                            headers:{
+                                Authorization: `Bearer ${token}`
+                            }
+                     })
+
+                     //refresh budgets list
+                     this.fetch_budgets()
+
+                     //clearing the form
+                     this.budgetData ={
+                        title:"",
+                        amount:"",
+                        date:""
+                     }
+
+                    }catch(error){
+                            console.log(err)
+                    }
                 }
             },
             created (){

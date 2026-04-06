@@ -60,3 +60,39 @@ await - pauses only that function until a reuslt is ready
      -> DONT block the whole program
 
 *promise* - represents a value that will be available later
+
+Authentication -> proving user identity(verificaton of user identity)
+Authorization -> what can a user do after authentication?
+
+
+types of languages
+1.compiled vs interpreted (execution style)
+2.strongly typed languages vs loosely typed langauges
+
+*jwt*
+
+
+local storage  - browser feature that lets you store data in the browser in key-value pairs
+
+window - current browser window / tab
+location - current url address : htpp://127.0.0.1/login
+href - where do I take a user
+
+user registration  -  create token (ux)
+redirection to login
+token creation
+token storage (local storage, http only cookie)
+
+ @submit.prevent="login"
+
+ @submit - once a form is submitted, call a function to perform a certain task (login)
+ prevent - preventing / stopping the default behaviour of the browser(prevents page reloading)
+
+*headers* - extra info sent along with your http request to the server 
+
+ Content-Type : application/json - i'm sending json data
+ Authorization -> here is my login pass
+
+
+ :key="budget.id" - unique identifier for ach row
+      - helps vue track items efficiently when the busget list changes (delete ,add,update)
