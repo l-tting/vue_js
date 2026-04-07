@@ -96,3 +96,40 @@ token storage (local storage, http only cookie)
 
  :key="budget.id" - unique identifier for ach row
       - helps vue track items efficiently when the busget list changes (delete ,add,update)
+
+*virtual environment*
+-an isolated environment in Pyhton that lets a project have it's own dependencies (libraries) without interfering with other projects
+global scope - your entire computer
+
+pip install flask_sqlalchemy
+pip install sqlalchemy
+pip install flask_bcrypt
+
+without venv :
+  -> All projects share the same global packages
+  -> one project update can break another
+with venv:
+  -> each project has its own Python + dependencies 
+
+  on windows & LINUX & MacOS:
+  creating virtual environment:
+     *python -m venv venv*
+     python - calls Python interpreter
+     -m - run a Python module as a script 
+     venv (first one) - built in module for creating virtual environments
+     venv (second) - create a virtual environment inside a folder names venv
+
+  activating a venv
+     on Windows:
+         *venv\Scripts\activate*
+     one Linux Or Ubuntu
+         *source myenv/bin/activate
+
+  deactivate a venv
+     *deactiavte*
+
+saving your dependencies including their versions
+ -> use a requirements.txt file 
+ pip freeze > requirements.txt (saving dependencies to the .txt file)
+ if you fork projects from Github
+    pip install -r requirements.txt
